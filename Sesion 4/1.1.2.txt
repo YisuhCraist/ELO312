@@ -1,0 +1,25 @@
+#include "main.h"
+
+int main(void) {
+    // Inicialización del HAL y configuración del sistema
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init();  // Inicializa los pines GPIO
+    
+    // Variable para almacenar el estado actual del pin
+    GPIO_PinState estado_pin;
+    
+    while (1) {
+        // Lee el estado de la entrada digital (ejemplo: PA0)
+        estado_pin = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+        
+        // Verifica si el estado es alto o bajo y muestra el resultado
+        if (estado_pin == GPIO_PIN_SET) {
+            printf("Entrada: HIGH\n");
+        } else {
+            printf("Entrada: LOW\n");
+        }
+        
+        HAL_Delay(100);  // Espera 100ms entre lecturas
+    }
+}
